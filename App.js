@@ -11,6 +11,8 @@ export default class App extends React.Component {
       running: false
     };
     this._handleStartClick = this._handleStartClick.bind(this);
+    this._handleResetClick = this._handleResetClick.bind(this);
+    this._handleStopClick = this._handleStopClick.bind(this);
   }
 
   _handleStartClick(event) {
@@ -21,6 +23,25 @@ export default class App extends React.Component {
       this.setState({ running: true });
     }
   }
+
+  _handleStopClick(event) {
+    if (this.state.running) {
+      clearInterval(this.interval);
+      this.setState({ running: false });
+    }
+
+  }
+
+  _handleResetClick(event) {
+    this._handleStopClick();
+    this.setState({
+      millis: 0,
+      seconds: 0,
+      minutes: 0
+    });
+
+  }
+
   tick() {
     let millis = this.state.millis + 1;
     let seconds = this.state.seconds;
@@ -43,10 +64,11 @@ export default class App extends React.Component {
   }
 
   render() {
+    let run = this.state.running === true;
     return (
       <div className="app">
         <div className="display">
-          <div className="state">'Status: Running'</div>
+          <div className="state">{run ? 'Status: Running' : 'Status: Stopped'}</div>
           <div className="numbers">
             <span className="mins">{this.state.minutes}:</span>
             <span className="secs">{this.state.seconds} </span>
@@ -59,10 +81,10 @@ export default class App extends React.Component {
             onClick={this._handleStartClick}>Start</button>
 
           <button className="btn stop "
-            onClick={this._handleStartClick}>Stop</button>
+            onClick={this._handleStopClick}>Stop</button>
 
           <button className="btn reset "
-            onClick={this._handleStartClick}>Reset</button>
+            onClick={this._handleResetClick}>Reset</button>
         </div>
       </div>);
   }
