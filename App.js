@@ -69,6 +69,8 @@ export default class App extends React.Component {
 
   render() {
     let run = this.state.running === true;
+    let stopDisabled = false === run;
+    let resetDisabled = (true === run || (false === run && (this.state.millis > 0 || this.state.seconds > 0 || this.state.minutes > 0)));
     return (
       <div className="app">
         <div className="display">
@@ -81,13 +83,13 @@ export default class App extends React.Component {
         </div>
 
         <div className="actions">
-          <button className="btn start "
+          <button className={"btn start " + (run ? 'disabled' : '')}
             onClick={this._handleStartClick}>Start</button>
 
-          <button className="btn stop "
+          <button className={"btn stop " + (stopDisabled ? 'disabled' : '')}
             onClick={this._handleStopClick}>Stop</button>
 
-          <button className="btn reset "
+          <button className={"btn reset " + (resetDisabled ? '' : 'disabled')}
             onClick={this._handleResetClick}>Reset</button>
         </div>
       </div>);
