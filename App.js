@@ -63,6 +63,10 @@ export default class App extends React.Component {
     });
   }
 
+  zeroPad(value) {
+    return value < 10 ? `0${value}` : value;
+  }
+
   render() {
     let run = this.state.running === true;
     return (
@@ -70,9 +74,9 @@ export default class App extends React.Component {
         <div className="display">
           <div className="state">{run ? 'Status: Running' : 'Status: Stopped'}</div>
           <div className="numbers">
-            <span className="mins">{this.state.minutes}:</span>
-            <span className="secs">{this.state.seconds} </span>
-            <span className="millis">.0{this.state.millis}</span>
+            <span className="mins">{this.zeroPad(this.state.minutes)}:</span>
+            <span className="secs">{this.zeroPad(this.state.seconds)} </span>
+            <span className="millis">.0{this.zeroPad(this.state.millis)}</span>
           </div>
         </div>
 
