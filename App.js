@@ -59,10 +59,10 @@ export default class App extends React.Component {
             onClick={this._handleStartClick}>Start</button>
 
           <button className="btn stop "
-            onClick={() => console.log("stop")}>Stop</button>
+            onClick={this._handleStartClick}>Stop</button>
 
           <button className="btn reset "
-            onClick={() => console.log("reset")}>Reset</button>
+            onClick={this._handleStartClick}>Reset</button>
         </div>
       </div>);
   }
